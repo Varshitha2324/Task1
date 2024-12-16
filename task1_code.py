@@ -58,3 +58,26 @@ def generate_response(relevant_chunks):
     return "Generated response based on relevant chunks."
 
 
+Example Use - Case:
+
+# Main
+pdf_path = "D:\ML/Tables- Charts- and Graphs with Examples from History- Economics- Education- Psychology- Urban Affairs and Everyday Life - 2017-2018.pdf"  # Replace with the actual path
+text = extract_text_from_pdf(pdf_path)
+chunks = chunk_text(text)
+embeddings = create_embeddings(chunks)
+index = store_embeddings(embeddings)
+
+query = "What is the unemployment rate based on the type of degree?"
+query_vec = query_embedding(query)
+_, indices = search(index, query_vec)
+
+# Fetch relevant chunks for response generation
+relevant_chunks = [chunks[i] for i in indices.flatten()]
+
+final_response = generate_response(relevant_chunks)
+print(final_response)
+
+O/p:
+Generated response based on relevant chunks.
+
+
